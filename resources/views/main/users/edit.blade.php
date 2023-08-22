@@ -9,8 +9,12 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                 <x-splade-form method="PUT" :default="$user" action="{{ route('users.update', $user->id) }}" class="space-y-3">
+                    <x-splade-file name="avatar" :label="__('Avatar')"/>
+                    <img v-if="form.avatar" :src="form.$fileAsUrl('avatar')" />
+                    <x-splade-input name="nisn" :label="__('NISN')" placeholder="Enter NISN..." />
                     <x-splade-input name="name" :label="__('Name')"/>
                     <x-splade-input name="email" :label="__('Email')" class="pb-3"/>
+                    <x-splade-input name="password" type="password" :label="__('Password')"/>
                     <label>Role</label>
                     <x-splade-select name="roles[]" :options="$roles" multiple class="pb-3">
                     @foreach ($roles as $role)

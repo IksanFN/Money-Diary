@@ -10,8 +10,10 @@ use App\Http\Requests\UserStore;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdate;
 use Illuminate\Support\Facades\Hash;
 use ProtoneMedia\Splade\Facades\Toast;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -61,21 +63,43 @@ class UserController extends Controller
         return view('main.users.edit', compact('user', 'roles', 'userRole'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserUpdate $request, User $user)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'roles' => 'required',
-        ]);
+        if ($request->hasFile('avatar')) {
+            
+            $image = $request->file('avatar');
+            $nameImage = Str::random(32).$request->avatar->getClientOriginalName();
+            $image->storeAs('public/users/avatar', $nameImage);
+            Storage::delete("public/users/{$user->avatar}");
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+            $user->update([
+                'name' => $request->name,
+                'nisn' => $request->nisn,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'avatar' => $nameImage,
+            ]);
+
+        } else {
+            $user->update([
+                'name' => $request->name,
+                'nisn' => $request->nisn,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        // Check roles user
+        if ($request->has('roles')) {
+            foreach ($request->roles as $role) {
+                if ($user->hasRole($role)) {
+                    Toast::warning('Role sudah ada!')->backdrop()->center()->autoDismiss(1);
+                    return back();
+                }
+            }
+        }
 
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
-
         $user->assignRole($request->roles);
 
         Toast::title('User berhasil di update')->center()->backdrop()->autoDismiss(1);
