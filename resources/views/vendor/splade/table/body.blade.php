@@ -3,8 +3,6 @@
         <tr
             :class="{
                 'bg-gray-50': table.striped && @js($itemKey) % 2,
-                'hover:bg-gray-100': table.striped,
-                'hover:bg-gray-50': !table.striped
             }"
         >
             @if($hasBulkActions = $table->hasBulkActions())

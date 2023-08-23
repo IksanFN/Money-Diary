@@ -13,7 +13,6 @@
                 </div>
                 <x-splade-table :for="$majors">
                     <x-splade-cell actions as="$major">
-                        <Link href="{{ route('majors.show', $major->id) }}" class="px-4 py-2 bg-slate-400 text-white rounded-xl mr-3 shadow-sm shadow-slate-200 hover:bg-slate-500"><i class="fa-regular fa-eye"></i></Link>
                         <Link href="{{ route('majors.edit', $major->id) }}" class="px-4 py-2 bg-indigo-400 text-white rounded-xl mr-3 shadow-sm shadow-indigo-200 hover:bg-indigo-500"><i class="fa-regular fa-pen-to-square"></i></Link>
                         <Link method="DELETE" href="{{ route('majors.destroy', $major->id) }}"
                             confirm="Apakah kamu yakin akan menghapusnya?"

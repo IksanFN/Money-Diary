@@ -48,8 +48,9 @@ class Majors extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['name'])
+            ->withGlobalSearch(columns: ['name', 'major_code'])
             ->column('name', sortable: true, canBeHidden:false)
+            ->column('major_code', canBeHidden:false)
             ->column('description')
             ->column('actions')
             ->simplePaginate(10);
