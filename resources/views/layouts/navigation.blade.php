@@ -51,7 +51,7 @@
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Class') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('majors.index')">
                                 {{ __('Majors') }}
                             </x-dropdown-link>
                             <span class="text-xs text-indigo-400 ps-4">Time Management</span>
