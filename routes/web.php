@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Main\MajorController;
 use App\Http\Controllers\Main\PermissionController;
 use App\Http\Controllers\Main\RoleController;
 use App\Http\Controllers\Main\UserController;
@@ -42,6 +43,7 @@ Route::middleware('splade')->group(function () {
 
         Route::resource('/users', UserController::class);
         Route::resource('/roles', RoleController::class);
+        Route::resource('majors', MajorController::class);
         Route::resource('/permissions', PermissionController::class);
         Route::delete('/{role}/permission/{permission}', [RoleController::class, 'deletePermission'])->name('roles.remove_permission');
         Route::resource('/years', YearController::class);
