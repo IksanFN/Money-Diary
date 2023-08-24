@@ -48,7 +48,7 @@
 
                         <x-slot name="content">
                             <span class="text-xs text-indigo-400 ps-4">Class Management</span>
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('kelases.index')">
                                 {{ __('Class') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('majors.index')">

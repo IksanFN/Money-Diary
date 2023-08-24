@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Main\KelasController;
 use App\Http\Controllers\Main\MajorController;
 use App\Http\Controllers\Main\PermissionController;
 use App\Http\Controllers\Main\RoleController;
@@ -41,13 +42,33 @@ Route::middleware('splade')->group(function () {
             return view('dashboard');
         })->middleware(['verified'])->name('dashboard');
 
+        // Route User
         Route::resource('/users', UserController::class);
+
+        // Route Role
         Route::resource('/roles', RoleController::class);
+
+        // Route Major
         Route::resource('majors', MajorController::class);
+
+        // Route Year
+        Route::resource('/years', YearController::class);
+        
+        // Route Class
+        Route::prefix('/kelases')->name('kelases.')->group(function() {
+            Route::get('/', [KelasController::class, 'index'])->name('index');
+            Route::get('/create', [KelasController::class, 'create'])->name('create');
+            Route::post('/create', [KelasController::class, 'store'])->name('store');
+            Route::get('/edit/{kelas}', [KelasController::class, 'edit'])->name('edit');
+            Route::put('/edit/{kelas}', [KelasController::class, 'update'])->name('update');
+            Route::delete('/delete/{kelas}', [KelasController::class, 'destroy'])->name('destroy');
+        });
+
+        // Route permission
         Route::resource('/permissions', PermissionController::class);
         Route::delete('/{role}/permission/{permission}', [RoleController::class, 'deletePermission'])->name('roles.remove_permission');
-        Route::resource('/years', YearController::class);
 
+        // Route Profile
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
