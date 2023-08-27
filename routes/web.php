@@ -4,6 +4,7 @@ use App\Http\Controllers\Main\KelasController;
 use App\Http\Controllers\Main\MajorController;
 use App\Http\Controllers\Main\PermissionController;
 use App\Http\Controllers\Main\RoleController;
+use App\Http\Controllers\Main\StudentController;
 use App\Http\Controllers\Main\UserController;
 use App\Http\Controllers\Main\YearController;
 use App\Http\Controllers\ProfileController;
@@ -63,6 +64,8 @@ Route::middleware('splade')->group(function () {
             Route::put('/edit/{kelas}', [KelasController::class, 'update'])->name('update');
             Route::delete('/delete/{kelas}', [KelasController::class, 'destroy'])->name('destroy');
         });
+
+        Route::resource('/students', StudentController::class);
 
         // Route permission
         Route::resource('/permissions', PermissionController::class);
