@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Mapping Student') }}
+            {{ __('Edit Student') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <x-splade-form action="{{ route('students.store') }}" class="">
+            <div class="bg-white overflow-hidden shadow-lg shadow-slate-100 sm:rounded-lg p-6">
+                <x-splade-form method="PUT" :default="$student" action="{{ route('students.update', $student->id) }}" class="">
                     <div class="grid grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-6 mb-5">
                         <div class="space-y-5">
                             <x-splade-select name="user_id" :options="$users" label="Users" class="" placeholder="Pilih User"/>
@@ -24,7 +24,7 @@
                             <x-splade-textarea name="alamat" label="Alamat" autosize />
                         </div>
                     </div>
-                    <x-splade-submit :label="__('Mapping Student')"/>
+                    <x-splade-submit :label="__('Update')"/>
                 </x-splade-form>
             </div>
         </div>

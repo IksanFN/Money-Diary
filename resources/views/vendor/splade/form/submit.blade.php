@@ -2,8 +2,8 @@
 
 <div @class($wrapperClass)>
     <button {{ $attributes->class([
-        'border rounded-md shadow-sm font-semibold py-2 px-4 focus:outline-none focus:ring focus:ring-opacity-50',
-        'bg-slate-500 hover:bg-slate-700 text-white border-transparent focus:border-slate-300 focus:ring-slate-200' => !$customStyling && $primary,
+        'rounded-md shadow-sm text-sm py-2 px-4 focus:outline-none focus:ring focus:ring-opacity-50',
+        'bg-slate-600 hover:bg-slate-800 text-white border-transparent focus:border-slate-300 focus:ring-slate-200' => !$customStyling && $primary,
         'bg-red-500 hover:bg-red-700 text-white border-transparent focus:border-red-700 focus:ring-red-200' => !$customStyling && $danger,
         'bg-white hover:bg-gray-100 text-gray-700 border-gray-300 focus:border-slate-300 focus:ring-slate-200' => !$customStyling && $secondary,
     ])->merge([
